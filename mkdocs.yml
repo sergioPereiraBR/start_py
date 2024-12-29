@@ -1,4 +1,7 @@
 site_name: Pereira DEV Analytics
+repo_url: https://github.com/sergioPereiraBR/start_py
+repo_name: sergioPereiraBR/start_py
+edit_uri: tree/main
 
 theme:
   name: material
