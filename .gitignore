@@ -2,8 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,venv,vs
 
 ### Makefile ###
-makefile
-makefile.txt
+# makefile
+# makefile.txt
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
