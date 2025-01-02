@@ -1,6 +1,6 @@
 #!/bin/bash
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-REGEX="^(build|ci|chore|cleanup|docs|feat|fix|hotfix|other|perf|raw|refactor|remove|style|test)\/[a-z0-9._-]+$"
+REGEX="^(feature|bugfix|release|hotfix)\/[a-z0-9._-]+$"
 
 if ! [[ $BRANCH =~ $REGEX ]]; then
   echo "O commit foi rejeitado pois não segue aos padrões definidos pelo time"
