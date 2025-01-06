@@ -1,7 +1,9 @@
+"""This is the module docstring."""
+
 from rich.console import Console
 
 
-def start(test: str = '') -> None:
+def start(test: str = '') -> int:
     """
     Informa o término da execução make.
 
@@ -26,17 +28,20 @@ def start(test: str = '') -> None:
     """
     console = Console()
     console.print(
-        f'\n\n[green]A estrutura inicial do projeto ',
-        f'[green]foi criada com sucesso!!\n',
+        '\n\n[green]A estrutura inicial do projeto ',
+        '[green]foi criada com sucesso!!\n',
     )
     console.print(
-        f'Para executar uma diretiva de comando: ',
-        f'[bold][yellow]make[white] diretiva[/bold]',
+        'Para executar uma diretiva de comando: ',
+        '[bold][yellow]make[white] diretiva[/bold]',
     )
     console.print(
-        f'Para saber mais sobre as ',
-        f'diretivas: [yellow]make[white] help\n\n',
+        'Para saber mais sobre as ',
+        'diretivas: [yellow]make[white] help\n\n',
     )
 
+    return 1
 
-start('')
+
+if __name__ == '__main__':
+    exit(start(''))

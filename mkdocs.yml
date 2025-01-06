@@ -8,11 +8,25 @@ theme:
   language: pt-BR
   logo: assets/logo.png
   favicon: assets/logo.png
+  palette:
+    - scheme: default
+      primary: blue
+      toggle:
+        icon: material/weather-night
+        name: Modo Escuro
+    - scheme: slate
+      primary: deep blue
+      toggle:
+        icon: material/weather-sunny
+        name: Modo Claro
 
 markdown_extensions:
   - attr_list
   - admonition
   - pymdownx.tasklist
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -24,9 +38,24 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extra.css
+  - https://unpkg.com/mermaid@8.5.1/dist/marmaid.css
+extra_javascript:
+  - https://unpkg.com/mermaid@8.5.1/dist/marmaid.min.js
+
+
 
 plugins:
+- macros
+- search
+- autorefs
 - mkdocstrings:
     handlers:
       python:
-        paths: [app.py]
+        path: [app]
+- coverage:
+    page_path: coverage  # default
+    html_report_dir: htmlcov  # default
+
+extra:
+  grupo:
+    variavel: valor

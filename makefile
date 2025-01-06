@@ -22,7 +22,7 @@ app: app.py
 	python app.py
 	@echo ${tes}
 
-poetry.lock: install quit_vscode
+poetry.lock: install update_toml quit_vscode
 
 quit_vscode:
 	poetry shell
@@ -41,11 +41,13 @@ install: .git python pyproject.toml ## instala dependencias usando poetry.
 	poetry add --group dev taskipy
 	@echo ${tes}
 	poetry add --group doc mkdocs
-	poetry add --group doc mkdocstrings
-	poetry add --group doc mkdocstrings-python
+	poetry add --group doc mkdocs-macros-plugin
 	poetry add --group doc mkdocs-material
 	poetry add --group doc mkdocs_pymdownx_material_extras
-	poetry add --group doc mkdocs-macros-plugin
+	poetry add --group doc mkdocstrings
+	poetry add --group doc mkdocstrings-python
+
+	
 	
 ## @ python
 python: ## Altera a versao do python
@@ -76,6 +78,7 @@ start: ## start do ambiente virtual
 doc: mkdocs.yml docs\assets docs\stylesheets docs\api
 	
 mkdocs.yml:
+	@echo mkdocs
 	mkdocs new .
 	copy ".\scripts\mkdocs.yml" ".\mkdocs.yml"
 	copy ".\scripts\index.md" ".\docs\index.md"
@@ -83,42 +86,60 @@ mkdocs.yml:
 	del ".\scripts\index.md"
 
 docs\assets:
+	@echo docs\assets
 	md docs\assets
 	copy ".\assets\image\logo.png" ".\docs\assets\logo.png"
 
 docs\stylesheets:
+	@echo docs\stylesheets
 	md docs\stylesheets
 	copy ".\scripts\extra.css" ".\docs\stylesheets\extra.css"
 	del ".\scripts\extra.css"
 	
 docs\api:
+	@echo docs\api
 	md docs\api
 	copy ".\scripts\src.md" ".\docs\api\src.md"
 	copy ".\scripts\help.md" ".\docs\api\help.md"
 	del ".\scripts\src.md"
 	del ".\scripts\help.md"
 
+update_toml:
+	md .\temp
+	copy "pyproject.toml" ".\temp\a.txt"
+	copy ".\scripts\toml.toml" ".\temp\b.txt"
+	copy ".\temp\*.txt" ".\pyproject.toml"
+	rd /q /s .\temp
+	del ".\scripts\toml.toml"
+	@echo ${tes}
+
 ## @ analise
 analytic: lint_mypy lint_isort ## analise estatica do codigo da aplicacao
 
 lint_mypy:
+	@echo mypy
 	$(POETRY) mypy .
 	@echo ${tes}
 	
 lint_isort:
+	@echo isort
 	$(POETRY) isort . ${ISORT_FLAGS} --check --diff
 	@echo ${tes}
 
 ## @ formatacao
 format: ## analise da formatacao do codigo da aplicacao
 	@echo ${tes}
+	@echo blue
 	$(POETRY) blue .
+	@echo isort
 	$(POETRY) isort ${ISORT_FLAGS} .
 	@echo ${tes}
 
 ## @ tipagem
 lint: ## verificacao da tipagem 
+	@echo blue
 	$(POETRY) blue . --check --diff
+	@echo isort
 	$(POETRY) isort . ${ISORT_FLAGS} --check --diff
 	@echo ${tes}
 # $(POETRY) prospector . --with-tool pep257 --dic-warning
@@ -126,18 +147,22 @@ lint: ## verificacao da tipagem
 
 ## @ teste
 test: ## analise dinamica
+	@echo pytest
 	$(POETRY) pytest -v
-	@echo ${tes}
+	@echo coverage
 	$(POETRY) pytest --cov=. --cov-report=html
-	@echo ${tes}
 
 ## @ seguranca
 sec: ## verifica vunerabilidades nas dependencias
 	@echo pip-audit
 	@echo ${tes}
 
+update_kanban:
+	copy ".\.kanbn" ".\docs\kanban"
+
 ## @ limpeza do pycache
 clean: ## deleta oas arquivos __pycache__ 
+	@echo clean
 	$(limpa)
 	@echo ${tes}
 
