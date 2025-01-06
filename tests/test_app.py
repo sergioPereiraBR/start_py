@@ -1,2 +1,7 @@
+from app import start
+
+
 def test_app():
-    assert True
+    entrada = start()
+    esperado = 0
+    assert entrada == esperado

@@ -3,7 +3,7 @@
 from rich.console import Console
 
 
-def start(test: str = '') -> int:
+def start():
     """
     Informa o término da execução make.
 
@@ -40,8 +40,8 @@ def start(test: str = '') -> int:
         'diretivas: [yellow]make[white] help\n\n',
     )
 
-    return 1
+    return 0
 
 
 if __name__ == '__main__':
-    exit(start(''))
+    exit(start())
