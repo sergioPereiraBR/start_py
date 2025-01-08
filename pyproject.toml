@@ -14,6 +14,7 @@ rich = "^13.9.4"
 pytest = "^8.3.4"
 pytest-coverage = "^0.0"
 pytest-watch = "^4.2.0"
+pydocstyle = "^6.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -49,13 +50,13 @@ profile = "black"
 line_length = 79
 
 [tool.taskipy.tasks]
-lint = "blue --check --diff . && isort --check --diff ."
+lint = "blue --check --diff . && isort --check --diff . && pydocstyle --convention=pep257 . "
 docs = "make update_kanban && mkdocs serve"
-cob = "pytest ./tests --cov=./tests"
-rel_cob = "pytest --cov=./tests --cov-report=lcov:lcov.info"
+cob = "pytest . --cov=."
+rel_cob = "pytest . --cov=. --cov-report=lcov:lcov.info"
 moniore = "ptw"
 pre_test = "task lint"
-test = "pytest -s -x --cov=./tests -vv"
-post_test = "coverage html"
+test = "pytest . -s -x --cov=. -vv"
+post_test = "coverage html && make update_kanban"
 git_add = "git add -p"
 help = "task -l"

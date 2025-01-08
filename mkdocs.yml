@@ -3,6 +3,9 @@ repo_url: https://github.com/sergioPereiraBR/start_py
 repo_name: sergioPereiraBR/start_py
 edit_uri: tree/main
 
+watch:
+  - .kanbn/...
+
 theme:
   name: material
   language: pt-BR

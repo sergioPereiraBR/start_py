@@ -46,8 +46,6 @@ install: .git python pyproject.toml ## instala dependencias usando poetry.
 	poetry add --group doc mkdocs_pymdownx_material_extras
 	poetry add --group doc mkdocstrings
 	poetry add --group doc mkdocstrings-python
-
-	
 	
 ## @ python
 python: ## Altera a versao do python
@@ -116,12 +114,14 @@ update_toml:
 ## @ analise
 analytic: lint_mypy lint_isort ## analise estatica do codigo da aplicacao
 
-lint_mypy:
+## @ lint mypy
+lint_mypy: ## analise pelo mypy
 	@echo mypy
 	$(POETRY) mypy .
 	@echo ${tes}
-	
-lint_isort:
+
+## @ lint isort
+lint_isort: ## analisa as ordens dos imports
 	@echo isort
 	$(POETRY) isort . ${ISORT_FLAGS} --check --diff
 	@echo ${tes}
@@ -157,8 +157,12 @@ sec: ## verifica vunerabilidades nas dependencias
 	@echo pip-audit
 	@echo ${tes}
 
-update_kanban:
-	copy ".\.kanbn" ".\docs\kanban"
+## @ atualiza kanban
+update_kanban: .\.kanbn\index.md remove_kanban ## atualiza os arquivos do kanban no mkdocs
+	xcopy ".\.kanbn\." ".\docs\work_process" /s /i
+
+remove_kanban:
+	RD /s /q ".\docs\work_process"
 
 ## @ limpeza do pycache
 clean: ## deleta oas arquivos __pycache__ 
@@ -170,4 +174,3 @@ clean: ## deleta oas arquivos __pycache__
 help: ## ajuda sobre os comandos das diretrizes no make
 	$(POETRY) python $(help)\help.py
 	@echo ${tes}
-

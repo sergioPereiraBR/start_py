@@ -4,8 +4,7 @@ from rich.console import Console
 
 
 def start():
-    """
-    Informa o término da execução make.
+    """Informa o término da execução make.
 
     Parameters:
         test (str): O argumento 'test' é Usando apenas para teste.
